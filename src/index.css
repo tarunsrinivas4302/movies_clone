@@ -1,0 +1,6 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+:root{
+    --video-bg : linear-gradient(90deg,#181818 0,#181818 0,rgba(24,24,24,0) 100%)
+}
