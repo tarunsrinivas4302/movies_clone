@@ -1,6 +1,6 @@
 
 import { FaArrowUp, FaChevronLeft, FaChevronRight, FaFire } from "react-icons/fa";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 
 const Trending = (props) => {
@@ -20,6 +20,14 @@ const Trending = (props) => {
         );
     };
 
+    useEffect(() => {
+        const slideInterval = setInterval(() => {
+            nextSlide();
+        }, 5000);
+        return () => {
+            clearInterval(slideInterval);
+        };
+    }, [currentIndex])
 
     return (
         <>
@@ -93,7 +101,7 @@ const Trending = (props) => {
 
             </div>
             {/* Progress bar */}
-            <div className="relative mt-3 h-2 bg-gray-300 rounded mb-6 max-sm:hidden">
+            <div className="relative mt-3 h-1 bg-gray-300 rounded mb-6 max-sm:hidden">
                 <div
                     className="absolute top-0 left-0 h-full bg-blue-500 rounded"
                     style={{

@@ -15,13 +15,6 @@ export const getSingleMovie = (payload) => {
   };
 };
 
-export const makeFilter = (payload) => {
-  return {
-    type: Types.MAKE_FILTER,
-    payload: payload,
-  };
-};
-
 export const getCountryList = (payload) => {
   return {
     type: Types.GET_COUNTRY_LIST_MOVIES,
@@ -50,9 +43,23 @@ export const getTrending = (payload) => {
   };
 };
 
-export const RECOMENDED_MOVIES = (payload) => {
+export const getRecomendedMovies = (payload) => {
   return {
-    type: Types.RECOMENDED_MOVIES,
+    type: Types.GET_RECOMMENDED_MOVIES_LIST,
+    payload: payload,
+  };
+};
+
+export const getRecomendedSeries = (payload) => {
+  return {
+    type: Types.GET_RECOMMENDED_SERIES_LIST,
+    payload: payload,
+  };
+};
+
+export const GET_LATEST_MOVIES = (payload) => {
+  return {
+    type: Types.GET_LATEST_MOVIES_LIST,
     payload: payload,
   };
 };
@@ -131,14 +138,19 @@ export const featured = (payload) => {
   };
 };
 
-export const getGenreList = async () => {
-  try {
-    const data = await makeRequest({
-      endpoint: "/genre/movie/list",
-      method: "GET",
-    });
-    return data.genres;
-  } catch (err) {
-    return Promise.reject(err);
-  }
+export const getSeriesList = (payload) => {
+  return async (dispatch) => {
+    dispatch(fetch_request());
+    try {
+      const data = await makeRequest({
+        endpoint: payload.endpoint,
+        method: payload.method,
+        data: payload.data,
+      });
+      dispatch(getRecomendedSeries(data.results));
+    } catch (e) {
+      console.log(e);
+      dispatch(fetch_request_failure(e.message));
+    }
+  };
 };

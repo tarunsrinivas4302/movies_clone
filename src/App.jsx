@@ -14,7 +14,7 @@ const App = () => {
                 <main>
                     <Outlet />
                 </main>
-                <footer><Footer /></footer>
+                <footer className="footer h-96"><Footer /></footer>
             </>
         )
     }
